@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+:root {
+  --size-icon-small: 20px;
+  --size-icon-medium: 24px;
+  --size-icon-large: 28px;
+}
+
+@theme {
+  --color-background: white;
+  --color-foreground: var(--color-zinc-950);
+
+  --color-primary: var(--color-zinc-900);
+  --color-primary-foreground: var(--color-zinc-50);
+
+  --color-secondary: var(--color-zinc-100);
+  --color-secondary-foreground: var(--color-zinc-900);
+
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-zinc-50);
+
+  --color-global-border: var(--color-zinc-200);
+}
+
+@layer base {
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
