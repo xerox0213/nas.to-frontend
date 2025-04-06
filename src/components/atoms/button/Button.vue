@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { LoaderCircle } from "lucide-vue-next";
   import { tv, type VariantProps } from "tailwind-variants";
   import { type HTMLAttributes } from "vue";
   import type { RouterLinkProps } from "vue-router";
@@ -80,6 +81,7 @@
     variant?: ButtonVariantsProps["variant"];
     size?: ButtonVariantsProps["size"];
     icon?: boolean;
+    loading?: boolean;
     to?: RouterLinkProps["to"];
     activeClass?: RouterLinkProps["activeClass"];
     exactActiveClass?: RouterLinkProps["exactActiveClass"];
@@ -95,7 +97,17 @@
   <button
     v-if="!to"
     :class="button({ variant, size, icon, class: props.class })"
+    :disabled="loading"
   >
+    <LoaderCircle
+      v-if="loading"
+      class="animate-spin"
+      :class="{
+        'size-(--size-icon-small)': size === 'small',
+        'size-(--size-icon-medium)': size === undefined || size === 'medium',
+        'size-(--size-icon-large)': size === 'large',
+      }"
+    />
     <slot>{{ label }}</slot>
   </button>
 
