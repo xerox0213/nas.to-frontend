@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --size-icon-small: 20px;
-  --size-icon-medium: 24px;
-  --size-icon-large: 28px;
+  --size-icon-small: 16px;
+  --size-icon-medium: 20px;
+  --size-icon-large: 24px;
 }
 
 @theme {
