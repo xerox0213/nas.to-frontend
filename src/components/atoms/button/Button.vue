@@ -4,7 +4,7 @@
   import type { RouterLinkProps } from "vue-router";
 
   const button = tv({
-    base: "flex items-center justify-center gap-x-2 rounded-sm transition-colors disabled:pointer-events-none disabled:opacity-50",
+    base: "flex items-center justify-center gap-x-2 rounded-sm text-center transition-colors disabled:pointer-events-none disabled:opacity-50",
     variants: {
       variant: {
         primary: "bg-primary text-primary-foreground hover:bg-primary/90",
@@ -16,9 +16,9 @@
           "bg-background text-foreground border-global-border hover:bg-secondary border",
       },
       size: {
-        small: "px-3 py-1 text-sm",
-        medium: "px-4 py-2 text-base",
-        large: "px-5 py-3 text-lg",
+        small: "px-3 py-1 text-xs",
+        medium: "px-4 py-2 text-sm",
+        large: "text-md px-5 py-3",
       },
       icon: {
         false: "",
