@@ -3,31 +3,49 @@
   import { useForm } from "vee-validate";
   import * as yup from "yup";
 
+  import { login } from "@/api/auth";
   import Button from "@/components/atoms/button/Button.vue";
   import ErrorMessage from "@/components/atoms/error-message/ErrorMessage.vue";
   import Input from "@/components/atoms/input/Input.vue";
   import Label from "@/components/atoms/label/Label.vue";
+  import { UnauthorizedError, ValidationError } from "@/errors";
+  import type { LoginValidationErrors } from "@/types";
 
-  const validationSchema = toTypedSchema(
-    yup.object({
-      email: yup
-        .string()
-        .required("The email field is required")
-        .email("Invalid email"),
-      password: yup.string().required("The password field is required"),
-    }),
-  );
+  const loginSchema = yup.object({
+    email: yup
+      .string()
+      .required("The email field is required")
+      .email("Invalid email"),
+    password: yup.string().required("The password field is required"),
+  });
+
+  const validationSchema = toTypedSchema(loginSchema);
+
+  export type LoginCredentials = yup.InferType<typeof loginSchema>;
 </script>
 
 <script setup lang="ts">
-  const { errors, defineField, handleSubmit } = useForm({ validationSchema });
+  const { errors, defineField, handleSubmit, setErrors } = useForm({
+    validationSchema,
+  });
 
   const [email, emailProps] = defineField("email");
 
   const [password, passwordProps] = defineField("password");
 
-  const onSubmit = handleSubmit((values) => {
-    console.log(values);
+  const onSubmit = handleSubmit(async (values) => {
+    try {
+      await login(values);
+    } catch (e) {
+      if (e instanceof ValidationError) {
+        const error = e as ValidationError<LoginValidationErrors>;
+        setErrors(error.errors);
+      } else if (e instanceof UnauthorizedError) {
+        console.log(e.message);
+      } else {
+        console.log(e);
+      }
+    }
   });
 </script>
 
