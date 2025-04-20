@@ -9,7 +9,7 @@
   import Input from "@/components/atoms/input/Input.vue";
   import Label from "@/components/atoms/label/Label.vue";
   import { UnauthorizedError, ValidationError } from "@/errors";
-  import type { LoginValidationErrors } from "@/types";
+  import type { ValidationErrors } from "@/types";
 
   const loginSchema = yup.object({
     email: yup
@@ -22,6 +22,8 @@
   const validationSchema = toTypedSchema(loginSchema);
 
   export type LoginCredentials = yup.InferType<typeof loginSchema>;
+
+  type LoginValidationErrors = ValidationErrors<LoginCredentials>;
 </script>
 
 <script setup lang="ts">

@@ -9,7 +9,7 @@
   import Input from "@/components/atoms/input/Input.vue";
   import Label from "@/components/atoms/label/Label.vue";
   import { ValidationError } from "@/errors";
-  import type { RegistrationValidationErrors } from "@/types";
+  import type { ValidationErrors } from "@/types";
 
   const registrationSchema = yup.object({
     name: yup.string().required("The name field is required"),
@@ -32,6 +32,8 @@
   export type RegistrationCredentials = yup.InferType<
     typeof registrationSchema
   >;
+
+  type RegistrationValidationErrors = ValidationErrors<RegistrationCredentials>;
 </script>
 
 <script setup lang="ts">
