@@ -1,3 +1,4 @@
+import type { LoginCredentials } from "@/pages/Login.vue";
 import type { RegistrationCredentials } from "@/pages/Register.vue";
 
 export type User = {
@@ -11,3 +12,5 @@ export type ValidationErrors<T> = {
 
 export type RegistrationValidationErrors =
   ValidationErrors<RegistrationCredentials>;
+
+export type LoginValidationErrors = ValidationErrors<LoginCredentials>;
