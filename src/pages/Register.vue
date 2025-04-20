@@ -1,3 +1,97 @@
+<script lang="ts">
+  import { toTypedSchema } from "@vee-validate/yup";
+  import { useForm } from "vee-validate";
+  import * as yup from "yup";
+
+  import Button from "@/components/atoms/button/Button.vue";
+  import ErrorMessage from "@/components/atoms/error-message/ErrorMessage.vue";
+  import Input from "@/components/atoms/input/Input.vue";
+  import Label from "@/components/atoms/label/Label.vue";
+
+  const validationSchema = toTypedSchema(
+    yup.object({
+      name: yup.string().required("The name field is required"),
+      email: yup
+        .string()
+        .required("The email field is required")
+        .email("Invalid email"),
+      password: yup
+        .string()
+        .required("The password field is required")
+        .min(3, "The password must contains 3 characters"),
+      password_confirmation: yup
+        .string()
+        .required("The confirm password field is required")
+        .oneOf([yup.ref("password")], "Passwords do not match"),
+    }),
+  );
+</script>
+
+<script setup lang="ts">
+  const { errors, defineField, handleSubmit } = useForm({
+    validationSchema,
+  });
+
+  const [name, nameProps] = defineField("name");
+
+  const [email, emailProps] = defineField("email");
+
+  const [password, passwordProps] = defineField("password");
+
+  const [confirm, confirmProps] = defineField("password_confirmation");
+
+  const onSubmit = handleSubmit((values) => {
+    console.log(values);
+  });
+</script>
+
 <template>
-  <h1>Register</h1>
+  <form
+    class="border-global-border m-auto mt-7 max-w-[450px] space-y-3 rounded-lg border p-5"
+    @submit.prevent="onSubmit"
+  >
+    <h1 class="text-center text-2xl font-bold">Join the community 😄</h1>
+
+    <div class="flex flex-col gap-y-1">
+      <Label for="name" label="Name" />
+      <Input id="name" v-model="name" v-bind="nameProps" />
+      <ErrorMessage :error="errors.name" />
+    </div>
+
+    <div class="flex flex-col gap-y-1">
+      <Label for="email" label="Email" />
+      <Input id="email" v-model="email" type="email" v-bind="emailProps" />
+      <ErrorMessage :error="errors.email" />
+    </div>
+
+    <div class="flex flex-col gap-y-1">
+      <Label for="password" label="Password" />
+      <Input
+        id="password"
+        v-model="password"
+        type="password"
+        v-bind="passwordProps"
+      />
+      <ErrorMessage :error="errors.password" />
+    </div>
+
+    <div class="flex flex-col gap-y-1">
+      <Label for="password-confirmation" label="Confirm password" />
+      <Input
+        id="password-confirmation"
+        v-model="confirm"
+        type="password"
+        v-bind="confirmProps"
+      />
+      <ErrorMessage :error="errors.password_confirmation" />
+    </div>
+
+    <div class="flex flex-col gap-y-2">
+      <Button>Sign up</Button>
+
+      <Button to="/login" variant="outline">
+        Already have an account ? Sign In
+      </Button>
+    </div>
+  </form>
 </template>
