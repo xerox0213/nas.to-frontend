@@ -71,7 +71,7 @@
     <h1 class="text-center text-2xl font-bold">Join the community 😄</h1>
 
     <div class="flex flex-col gap-y-1">
-      <Label for="name" label="Name" />
+      <Label for="name" label="Name" required />
       <Input
         id="name"
         v-model="name"
@@ -88,7 +88,7 @@
     </div>
 
     <div class="flex flex-col gap-y-1">
-      <Label for="email" label="Email" />
+      <Label for="email" label="Email" required />
       <Input
         id="email"
         v-model="email"
@@ -106,7 +106,7 @@
     </div>
 
     <div class="flex flex-col gap-y-1">
-      <Label for="password" label="Password" />
+      <Label for="password" label="Password" required />
       <Input
         id="password"
         v-model="password"
@@ -124,7 +124,7 @@
     </div>
 
     <div class="flex flex-col gap-y-1">
-      <Label for="password-confirmation" label="Confirm password" />
+      <Label for="password-confirmation" label="Confirm password" required />
       <Input
         id="password-confirmation"
         v-model="confirm"

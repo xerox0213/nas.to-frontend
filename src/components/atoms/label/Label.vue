@@ -1,6 +1,7 @@
 <script lang="ts">
   interface Props {
     label?: string;
+    required?: boolean;
   }
 </script>
 
@@ -11,5 +12,6 @@
 <template>
   <label class="text-sm font-medium">
     <slot>{{ label }}</slot>
+    <span v-if="required" aria-hidden="true">*</span>
   </label>
 </template>
