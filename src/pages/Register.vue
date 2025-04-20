@@ -72,14 +72,37 @@
 
     <div class="flex flex-col gap-y-1">
       <Label for="name" label="Name" />
-      <Input id="name" v-model="name" v-bind="nameProps" />
-      <ErrorMessage :error="errors.name" />
+      <Input
+        id="name"
+        v-model="name"
+        v-bind="nameProps"
+        aria-required="true"
+        :aria-invalid="errors.name != undefined"
+        aria-describedby="error-name"
+      />
+      <ErrorMessage
+        id="error-name"
+        :error="errors.name"
+        aria-live="assertive"
+      />
     </div>
 
     <div class="flex flex-col gap-y-1">
       <Label for="email" label="Email" />
-      <Input id="email" v-model="email" type="email" v-bind="emailProps" />
-      <ErrorMessage :error="errors.email" />
+      <Input
+        id="email"
+        v-model="email"
+        type="email"
+        v-bind="emailProps"
+        aria-required="true"
+        :aria-invalid="errors.email != undefined"
+        aria-describedby="error-email"
+      />
+      <ErrorMessage
+        id="error-email"
+        :error="errors.email"
+        aria-live="assertive"
+      />
     </div>
 
     <div class="flex flex-col gap-y-1">
@@ -89,8 +112,15 @@
         v-model="password"
         type="password"
         v-bind="passwordProps"
+        aria-required="true"
+        :aria-invalid="errors.password != undefined"
+        aria-describedby="error-password"
       />
-      <ErrorMessage :error="errors.password" />
+      <ErrorMessage
+        id="error-password"
+        :error="errors.password"
+        aria-live="assertive"
+      />
     </div>
 
     <div class="flex flex-col gap-y-1">
@@ -100,8 +130,15 @@
         v-model="confirm"
         type="password"
         v-bind="confirmProps"
+        aria-required="true"
+        :aria-invalid="errors.password_confirmation != undefined"
+        aria-describedby="error-password-confirmation"
       />
-      <ErrorMessage :error="errors.password_confirmation" />
+      <ErrorMessage
+        id="error-password-confirmation"
+        :error="errors.password_confirmation"
+        aria-live="assertive"
+      />
     </div>
 
     <div class="flex flex-col gap-y-2">

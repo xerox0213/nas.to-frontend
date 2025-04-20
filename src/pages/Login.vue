@@ -60,8 +60,20 @@
 
     <div class="flex flex-col gap-y-1">
       <Label for="email" label="Email" />
-      <Input id="email" v-model="email" type="email" v-bind="emailProps" />
-      <ErrorMessage :error="errors.email" />
+      <Input
+        id="email"
+        v-model="email"
+        type="email"
+        v-bind="emailProps"
+        aria-required="true"
+        aria-describedby="error-email"
+        :aria-invalid="errors.email != undefined"
+      />
+      <ErrorMessage
+        id="error-email"
+        :error="errors.email"
+        aria-live="assertive"
+      />
     </div>
 
     <div class="flex flex-col gap-y-1">
@@ -71,8 +83,15 @@
         v-model="password"
         type="password"
         v-bind="passwordProps"
+        aria-required="true"
+        aria-describedby="error-password"
+        :aria-invalid="errors.password != undefined"
       />
-      <ErrorMessage :error="errors.password" />
+      <ErrorMessage
+        id="error-password"
+        :error="errors.password"
+        aria-live="assertive"
+      />
     </div>
 
     <div class="flex flex-col gap-y-2">
