@@ -1,4 +1,5 @@
-import { UnauthenticatedError } from "@/errors";
+import { UnauthenticatedError, ValidationError } from "@/errors";
+import type { RegistrationCredentials } from "@/pages/Register.vue";
 import type { User } from "@/types";
 
 import { API_BASE_URL, options } from "./utils";
@@ -25,4 +26,22 @@ export const getUser = async (): Promise<User> => {
   const user = (await res.json()) as User;
 
   return user;
+};
+
+export const register = async (credentials: RegistrationCredentials) => {
+  await getCsrf();
+
+  const res = await fetch(
+    `${API_BASE_URL}/api/register`,
+    options("POST", credentials),
+  );
+
+  if (!res.ok) {
+    const error = await res.json();
+
+    switch (res.status) {
+      case 422:
+        throw new ValidationError(error.message, error.errors);
+    }
+  }
 };
