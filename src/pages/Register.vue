@@ -3,32 +3,39 @@
   import { useForm } from "vee-validate";
   import * as yup from "yup";
 
+  import { register } from "@/api/auth";
   import Button from "@/components/atoms/button/Button.vue";
   import ErrorMessage from "@/components/atoms/error-message/ErrorMessage.vue";
   import Input from "@/components/atoms/input/Input.vue";
   import Label from "@/components/atoms/label/Label.vue";
+  import { ValidationError } from "@/errors";
+  import type { RegistrationValidationErrors } from "@/types";
 
-  const validationSchema = toTypedSchema(
-    yup.object({
-      name: yup.string().required("The name field is required"),
-      email: yup
-        .string()
-        .required("The email field is required")
-        .email("Invalid email"),
-      password: yup
-        .string()
-        .required("The password field is required")
-        .min(3, "The password must contains 3 characters"),
-      password_confirmation: yup
-        .string()
-        .required("The confirm password field is required")
-        .oneOf([yup.ref("password")], "Passwords do not match"),
-    }),
-  );
+  const registrationSchema = yup.object({
+    name: yup.string().required("The name field is required"),
+    email: yup
+      .string()
+      .required("The email field is required")
+      .email("Invalid email"),
+    password: yup
+      .string()
+      .required("The password field is required")
+      .min(3, "The password must contains 3 characters"),
+    password_confirmation: yup
+      .string()
+      .required("The confirm password field is required")
+      .oneOf([yup.ref("password")], "Passwords do not match"),
+  });
+
+  const validationSchema = toTypedSchema(registrationSchema);
+
+  export type RegistrationCredentials = yup.InferType<
+    typeof registrationSchema
+  >;
 </script>
 
 <script setup lang="ts">
-  const { errors, defineField, handleSubmit } = useForm({
+  const { errors, defineField, handleSubmit, setErrors } = useForm({
     validationSchema,
   });
 
@@ -40,8 +47,17 @@
 
   const [confirm, confirmProps] = defineField("password_confirmation");
 
-  const onSubmit = handleSubmit((values) => {
-    console.log(values);
+  const onSubmit = handleSubmit(async (values) => {
+    try {
+      await register(values);
+    } catch (e) {
+      if (e instanceof ValidationError) {
+        const error = e as ValidationError<RegistrationValidationErrors>;
+        setErrors(error.errors);
+      } else {
+        console.log("Type Error");
+      }
+    }
   });
 </script>
 
