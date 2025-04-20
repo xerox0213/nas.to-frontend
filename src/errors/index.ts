@@ -11,3 +11,12 @@ export class UnauthenticatedError extends ApiError {
     super(message);
   }
 }
+
+export class ValidationError<T> extends ApiError {
+  errors: T;
+
+  constructor(message: string, errors: T) {
+    super(message);
+    this.errors = errors;
+  }
+}
