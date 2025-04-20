@@ -3,6 +3,7 @@ import "vue-router";
 import { createRouter, createWebHistory, type RouterOptions } from "vue-router";
 
 import ServerError from "@/pages/errors/500.vue";
+import Home from "@/pages/Home.vue";
 import Login from "@/pages/Login.vue";
 import Register from "@/pages/Register.vue";
 
@@ -30,6 +31,14 @@ const routes: RouterOptions["routes"] = [
     path: "/login",
     meta: {
       requiresAuth: false,
+    },
+  },
+  {
+    component: Home,
+    name: "home",
+    path: "/",
+    meta: {
+      requiresAuth: true,
     },
   },
   {
