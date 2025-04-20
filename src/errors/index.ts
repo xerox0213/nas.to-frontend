@@ -20,3 +20,9 @@ export class ValidationError<T> extends ApiError {
     this.errors = errors;
   }
 }
+
+export class UnauthorizedError extends ApiError {
+  constructor(message: string) {
+    super(message);
+  }
+}
