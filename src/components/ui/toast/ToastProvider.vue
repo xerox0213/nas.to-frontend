@@ -96,7 +96,7 @@
     <TransitionGroup
       tag="ol"
       class="fixed right-2 bottom-2 flex flex-col gap-y-2"
-      enter-from-class="opacity-0"
+      enter-from-class="translate-y-full"
       leave-to-class="opacity-0 translate-x-full"
       enter-active-class="transition-all"
       leave-active-class="transition-all fixed -z-10"
