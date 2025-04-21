@@ -4,10 +4,10 @@
   import * as yup from "yup";
 
   import { register } from "@/api/auth";
-  import Button from "@/components/atoms/button/Button.vue";
-  import ErrorMessage from "@/components/atoms/error-message/ErrorMessage.vue";
-  import Input from "@/components/atoms/input/Input.vue";
-  import Label from "@/components/atoms/label/Label.vue";
+  import Button from "@/components/ui/button/Button.vue";
+  import ErrorMessage from "@/components/ui/error-message/ErrorMessage.vue";
+  import Input from "@/components/ui/input/Input.vue";
+  import Label from "@/components/ui/label/Label.vue";
   import { ValidationError } from "@/errors";
   import type { ValidationErrors } from "@/types";
 
