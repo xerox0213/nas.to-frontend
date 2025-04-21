@@ -1,9 +1,13 @@
 <script setup lang="ts">
   import { RouterView } from "vue-router";
+
+  import ToastProvider from "./components/ui/toast/ToastProvider.vue";
 </script>
 
 <template>
-  <main class="container">
-    <RouterView />
-  </main>
+  <ToastProvider>
+    <main class="container">
+      <RouterView />
+    </main>
+  </ToastProvider>
 </template>

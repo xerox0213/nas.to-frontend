@@ -1,5 +1,6 @@
 <script lang="ts">
   import { toTypedSchema } from "@vee-validate/yup";
+  import { Wifi } from "lucide-vue-next";
   import { useForm } from "vee-validate";
   import * as yup from "yup";
 
@@ -8,6 +9,7 @@
   import ErrorMessage from "@/components/ui/error-message/ErrorMessage.vue";
   import Input from "@/components/ui/input/Input.vue";
   import Label from "@/components/ui/label/Label.vue";
+  import { useToast } from "@/composables/useToast";
   import { UnauthorizedError, ValidationError } from "@/errors";
   import type { ValidationErrors } from "@/types";
 
@@ -31,6 +33,8 @@
     validationSchema,
   });
 
+  const { toast } = useToast();
+
   const [email, emailProps] = defineField("email");
 
   const [password, passwordProps] = defineField("password");
@@ -45,7 +49,12 @@
       } else if (e instanceof UnauthorizedError) {
         console.log(e.message);
       } else {
-        console.log(e);
+        toast({
+          icon: Wifi,
+          title: "Uh Oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          variant: "destructive",
+        });
       }
     }
   });
