@@ -16,8 +16,13 @@
   --color-secondary: var(--color-zinc-100);
   --color-secondary-foreground: var(--color-zinc-900);
 
-  --color-destructive: var(--color-red-600);
+  --color-destructive: var(--color-red-500);
   --color-destructive-foreground: var(--color-zinc-50);
+  --color-destructive-accent: var(--color-red-700);
+
+  --color-success: var(--color-emerald-200);
+  --color-success-foreground: var(--color-zinc-900);
+  --color-success-accent: var(--color-emerald-400);
 
   --color-global-border: var(--color-zinc-200);
 }
