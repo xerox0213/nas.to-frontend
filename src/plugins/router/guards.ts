@@ -13,7 +13,7 @@ export const authGuard = async (to: RouteLocationNormalized) => {
       userStore.user = user;
     } catch (error) {
       if (error instanceof TypeError) {
-        return { name: "server-error" };
+        return { name: "login" };
       }
     }
   }
