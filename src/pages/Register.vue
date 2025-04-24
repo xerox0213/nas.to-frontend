@@ -75,6 +75,7 @@
 
 <template>
   <form
+    novalidate
     class="border-global-border m-auto mt-7 max-w-[450px] space-y-3 rounded-lg border p-5"
     @submit.prevent="onSubmit"
   >
