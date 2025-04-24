@@ -21,11 +21,11 @@
     toastLifetime?: number;
   }
 
-  export type ToastContext = {
+  export type ToastCtx = {
     addToast: (toast: ToastData) => void;
   };
 
-  export const toastKey = Symbol() as InjectionKey<ToastContext>;
+  export const ToastCtxKey = Symbol() as InjectionKey<ToastCtx>;
 </script>
 
 <script setup lang="ts">
@@ -86,7 +86,7 @@
     document.removeEventListener("visibilitychange", onVisibilityChange);
   });
 
-  provide(toastKey, { addToast });
+  provide(ToastCtxKey, { addToast });
 </script>
 
 <template>

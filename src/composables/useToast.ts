@@ -1,12 +1,12 @@
 import { inject } from "vue";
 
 import {
-  type ToastContext,
-  toastKey,
+  type ToastCtx,
+  ToastCtxKey,
 } from "@/components/ui/toast/ToastProvider.vue";
 
 export const useToast = () => {
-  const { addToast } = inject(toastKey) as ToastContext;
+  const { addToast } = inject(ToastCtxKey) as ToastCtx;
 
   return { toast: addToast };
 };
