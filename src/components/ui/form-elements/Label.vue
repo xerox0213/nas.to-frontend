@@ -16,6 +16,6 @@
 <template>
   <label :for="inputId" class="text-sm font-medium">
     <slot>{{ label }}</slot>
-    <span v-if="required" aria-hidden="true">*</span>
+    <span v-if="required"> *</span>
   </label>
 </template>

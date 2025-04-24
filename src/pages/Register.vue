@@ -80,52 +80,48 @@
   >
     <h1 class="text-center text-2xl font-bold">Join the community 😄</h1>
 
-    <FormField name="name" required>
-      <div class="flex flex-col gap-y-1">
-        <Label label="Name" />
-        <Input v-model="name" autocomplete="name" v-bind="nameProps" />
-        <ErrorMessage />
-      </div>
+    <FormField name="name" required class="flex flex-col gap-y-1">
+      <Label label="Name" />
+      <Input v-model="name" autocomplete="name" v-bind="nameProps" />
+      <ErrorMessage />
     </FormField>
 
-    <FormField name="email" required>
-      <div class="flex flex-col gap-y-1">
-        <Label label="Email" />
-        <Input
-          v-model="email"
-          type="email"
-          autocomplete="email"
-          inputmode="email"
-          v-bind="emailProps"
-        />
-        <ErrorMessage />
-      </div>
+    <FormField name="email" required class="flex flex-col gap-y-1">
+      <Label label="Email" />
+      <Input
+        v-model="email"
+        type="email"
+        autocomplete="email"
+        inputmode="email"
+        v-bind="emailProps"
+      />
+      <ErrorMessage />
     </FormField>
 
-    <FormField name="password" required>
-      <div class="flex flex-col gap-y-1">
-        <Label label="Password" />
-        <Input
-          v-model="password"
-          type="password"
-          autocomplete="new-password"
-          v-bind="passwordProps"
-        />
-        <ErrorMessage />
-      </div>
+    <FormField name="password" required class="flex flex-col gap-y-1">
+      <Label label="Password" />
+      <Input
+        v-model="password"
+        type="password"
+        autocomplete="new-password"
+        v-bind="passwordProps"
+      />
+      <ErrorMessage />
     </FormField>
 
-    <FormField name="password_confirmation">
-      <div class="flex flex-col gap-y-1">
-        <Label label="Confirm password" />
-        <Input
-          v-model="confirm"
-          type="password"
-          v-bind="confirmProps"
-          autocomplete="new-password"
-        />
-        <ErrorMessage />
-      </div>
+    <FormField
+      name="password_confirmation"
+      required
+      class="flex flex-col gap-y-1"
+    >
+      <Label label="Confirm password" />
+      <Input
+        v-model="confirm"
+        type="password"
+        v-bind="confirmProps"
+        autocomplete="new-password"
+      />
+      <ErrorMessage />
     </FormField>
 
     <div class="flex flex-col gap-y-2">

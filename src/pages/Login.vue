@@ -69,31 +69,27 @@
   >
     <h1 class="text-center text-2xl font-bold">Welcome back 😄</h1>
 
-    <FormField name="email" required>
-      <div class="flex flex-col gap-y-1">
-        <Label label="Email" />
-        <Input
-          v-model="email"
-          type="email"
-          autocomplete="email"
-          inputmode="email"
-          v-bind="emailProps"
-        />
-        <ErrorMessage />
-      </div>
+    <FormField name="email" required class="flex flex-col gap-y-1">
+      <Label label="Email" />
+      <Input
+        v-model="email"
+        type="email"
+        autocomplete="email"
+        inputmode="email"
+        v-bind="emailProps"
+      />
+      <ErrorMessage />
     </FormField>
 
-    <FormField name="password" required>
-      <div class="flex flex-col gap-y-1">
-        <Label label="Password" />
-        <Input
-          v-model="password"
-          type="password"
-          autocomplete="current-password"
-          v-bind="passwordProps"
-        />
-        <ErrorMessage />
-      </div>
+    <FormField name="password" required class="flex flex-col gap-y-1">
+      <Label label="Password" />
+      <Input
+        v-model="password"
+        type="password"
+        autocomplete="current-password"
+        v-bind="passwordProps"
+      />
+      <ErrorMessage />
     </FormField>
 
     <div class="flex flex-col gap-y-2">
