@@ -6,9 +6,10 @@
 
   import { register } from "@/api/auth";
   import Button from "@/components/ui/button/Button.vue";
-  import ErrorMessage from "@/components/ui/error-message/ErrorMessage.vue";
-  import Input from "@/components/ui/input/Input.vue";
-  import Label from "@/components/ui/label/Label.vue";
+  import ErrorMessage from "@/components/ui/form-elements/ErrorMessage.vue";
+  import FormField from "@/components/ui/form-elements/FormField.vue";
+  import Input from "@/components/ui/form-elements/Input.vue";
+  import Label from "@/components/ui/form-elements/Label.vue";
   import { useToast } from "@/composables/useToast";
   import { ValidationError } from "@/errors";
   import type { ValidationErrors } from "@/types";
@@ -39,7 +40,7 @@
 </script>
 
 <script setup lang="ts">
-  const { errors, defineField, handleSubmit, setErrors } = useForm({
+  const { defineField, handleSubmit, setErrors } = useForm({
     validationSchema,
   });
 
@@ -79,76 +80,53 @@
   >
     <h1 class="text-center text-2xl font-bold">Join the community 😄</h1>
 
-    <div class="flex flex-col gap-y-1">
-      <Label for="name" label="Name" required />
-      <Input
-        id="name"
-        v-model="name"
-        v-bind="nameProps"
-        aria-required="true"
-        :aria-invalid="errors.name != undefined"
-        aria-describedby="error-name"
-      />
-      <ErrorMessage
-        id="error-name"
-        :error="errors.name"
-        aria-live="assertive"
-      />
-    </div>
+    <FormField name="name" required>
+      <div class="flex flex-col gap-y-1">
+        <Label label="Name" />
+        <Input v-model="name" autocomplete="name" v-bind="nameProps" />
+        <ErrorMessage />
+      </div>
+    </FormField>
 
-    <div class="flex flex-col gap-y-1">
-      <Label for="email" label="Email" required />
-      <Input
-        id="email"
-        v-model="email"
-        type="email"
-        v-bind="emailProps"
-        aria-required="true"
-        :aria-invalid="errors.email != undefined"
-        aria-describedby="error-email"
-      />
-      <ErrorMessage
-        id="error-email"
-        :error="errors.email"
-        aria-live="assertive"
-      />
-    </div>
+    <FormField name="email" required>
+      <div class="flex flex-col gap-y-1">
+        <Label label="Email" />
+        <Input
+          v-model="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          v-bind="emailProps"
+        />
+        <ErrorMessage />
+      </div>
+    </FormField>
 
-    <div class="flex flex-col gap-y-1">
-      <Label for="password" label="Password" required />
-      <Input
-        id="password"
-        v-model="password"
-        type="password"
-        v-bind="passwordProps"
-        aria-required="true"
-        :aria-invalid="errors.password != undefined"
-        aria-describedby="error-password"
-      />
-      <ErrorMessage
-        id="error-password"
-        :error="errors.password"
-        aria-live="assertive"
-      />
-    </div>
+    <FormField name="password" required>
+      <div class="flex flex-col gap-y-1">
+        <Label label="Password" />
+        <Input
+          v-model="password"
+          type="password"
+          autocomplete="new-password"
+          v-bind="passwordProps"
+        />
+        <ErrorMessage />
+      </div>
+    </FormField>
 
-    <div class="flex flex-col gap-y-1">
-      <Label for="password-confirmation" label="Confirm password" required />
-      <Input
-        id="password-confirmation"
-        v-model="confirm"
-        type="password"
-        v-bind="confirmProps"
-        aria-required="true"
-        :aria-invalid="errors.password_confirmation != undefined"
-        aria-describedby="error-password-confirmation"
-      />
-      <ErrorMessage
-        id="error-password-confirmation"
-        :error="errors.password_confirmation"
-        aria-live="assertive"
-      />
-    </div>
+    <FormField name="password_confirmation">
+      <div class="flex flex-col gap-y-1">
+        <Label label="Confirm password" />
+        <Input
+          v-model="confirm"
+          type="password"
+          v-bind="confirmProps"
+          autocomplete="new-password"
+        />
+        <ErrorMessage />
+      </div>
+    </FormField>
 
     <div class="flex flex-col gap-y-2">
       <Button>Sign up</Button>

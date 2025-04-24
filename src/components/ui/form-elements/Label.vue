@@ -1,16 +1,20 @@
 <script lang="ts">
+  import { inject } from "vue";
+
+  import { type FormFieldCtx, FormFieldCtxKey } from "./FormField.vue";
+
   interface Props {
     label?: string;
-    required?: boolean;
   }
 </script>
 
 <script setup lang="ts">
+  const { inputId, required } = inject(FormFieldCtxKey) as FormFieldCtx;
   defineProps<Props>();
 </script>
 
 <template>
-  <label class="text-sm font-medium">
+  <label :for="inputId" class="text-sm font-medium">
     <slot>{{ label }}</slot>
     <span v-if="required" aria-hidden="true">*</span>
   </label>

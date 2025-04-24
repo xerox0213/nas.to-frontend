@@ -6,9 +6,10 @@
 
   import { login } from "@/api/auth";
   import Button from "@/components/ui/button/Button.vue";
-  import ErrorMessage from "@/components/ui/error-message/ErrorMessage.vue";
-  import Input from "@/components/ui/input/Input.vue";
-  import Label from "@/components/ui/label/Label.vue";
+  import ErrorMessage from "@/components/ui/form-elements/ErrorMessage.vue";
+  import FormField from "@/components/ui/form-elements/FormField.vue";
+  import Input from "@/components/ui/form-elements/Input.vue";
+  import Label from "@/components/ui/form-elements/Label.vue";
   import { useToast } from "@/composables/useToast";
   import { UnauthorizedError, ValidationError } from "@/errors";
   import type { ValidationErrors } from "@/types";
@@ -29,7 +30,7 @@
 </script>
 
 <script setup lang="ts">
-  const { errors, defineField, handleSubmit, setErrors } = useForm({
+  const { defineField, handleSubmit, setErrors } = useForm({
     validationSchema,
   });
 
@@ -62,46 +63,38 @@
 
 <template>
   <form
+    novalidate
     class="border-global-border m-auto mt-7 max-w-[450px] space-y-3 rounded-lg border p-5"
     @submit.prevent="onSubmit"
   >
     <h1 class="text-center text-2xl font-bold">Welcome back 😄</h1>
 
-    <div class="flex flex-col gap-y-1">
-      <Label for="email" label="Email" required />
-      <Input
-        id="email"
-        v-model="email"
-        type="email"
-        v-bind="emailProps"
-        aria-required="true"
-        aria-describedby="error-email"
-        :aria-invalid="errors.email != undefined"
-      />
-      <ErrorMessage
-        id="error-email"
-        :error="errors.email"
-        aria-live="assertive"
-      />
-    </div>
+    <FormField name="email" required>
+      <div class="flex flex-col gap-y-1">
+        <Label label="Email" />
+        <Input
+          v-model="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          v-bind="emailProps"
+        />
+        <ErrorMessage />
+      </div>
+    </FormField>
 
-    <div class="flex flex-col gap-y-1">
-      <Label for="password" label="Password" required />
-      <Input
-        id="password"
-        v-model="password"
-        type="password"
-        v-bind="passwordProps"
-        aria-required="true"
-        aria-describedby="error-password"
-        :aria-invalid="errors.password != undefined"
-      />
-      <ErrorMessage
-        id="error-password"
-        :error="errors.password"
-        aria-live="assertive"
-      />
-    </div>
+    <FormField name="password" required>
+      <div class="flex flex-col gap-y-1">
+        <Label label="Password" />
+        <Input
+          v-model="password"
+          type="password"
+          autocomplete="current-password"
+          v-bind="passwordProps"
+        />
+        <ErrorMessage />
+      </div>
+    </FormField>
 
     <div class="flex flex-col gap-y-2">
       <Button>Sign in</Button>
