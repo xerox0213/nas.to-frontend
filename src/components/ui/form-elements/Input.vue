@@ -1,7 +1,7 @@
 <script lang="ts">
   import { tv } from "tailwind-variants";
-  import { useIsFieldValid } from "vee-validate";
-  import { type HTMLAttributes, inject } from "vue";
+  import { useFieldError } from "vee-validate";
+  import { computed, type HTMLAttributes, inject } from "vue";
 
   import { type FormFieldCtx, FormFieldCtxKey } from "./FormField.vue";
 
@@ -23,7 +23,9 @@
 
   const model = defineModel<string>();
 
-  const valid = useIsFieldValid(name);
+  const error = useFieldError(name);
+
+  const invalid = computed(() => error.value != undefined);
 </script>
 
 <template>
@@ -32,7 +34,7 @@
     v-model="model"
     :name="name"
     :aria-describedby="errorMsgId"
-    :aria-invalid="!valid"
+    :aria-invalid="invalid"
     :aria-required="required"
     :class="input({ class: props.class })"
   />
