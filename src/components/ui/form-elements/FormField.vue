@@ -1,5 +1,11 @@
 <script lang="ts">
-  import { type InjectionKey, provide, useId } from "vue";
+  import {
+    computed,
+    type ComputedRef,
+    type InjectionKey,
+    provide,
+    useId,
+  } from "vue";
 
   interface Props {
     name: string;
@@ -9,8 +15,8 @@
   export interface FormFieldCtx {
     inputId: string;
     errorMsgId: string;
-    name: string;
-    required: boolean;
+    name: ComputedRef<string>;
+    required: ComputedRef<boolean>;
   }
 
   export const FormFieldCtxKey = Symbol() as InjectionKey<FormFieldCtx>;
@@ -21,6 +27,10 @@
     required: false,
   });
 
+  const name = computed(() => props.name);
+
+  const required = computed(() => props.required);
+
   const inputId = useId();
 
   const errorMsgId = useId();
@@ -28,8 +38,8 @@
   provide(FormFieldCtxKey, {
     inputId,
     errorMsgId,
-    name: props.name,
-    required: props.required,
+    name,
+    required,
   });
 </script>
 
