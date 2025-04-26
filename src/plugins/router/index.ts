@@ -2,9 +2,9 @@ import "vue-router";
 
 import { createRouter, createWebHistory, type RouterOptions } from "vue-router";
 
-import CreateArticle from "@/pages/CreateArticle.vue";
 import Home from "@/pages/Home.vue";
 import Login from "@/pages/Login.vue";
+import NewArticle from "@/pages/NewArticle.vue";
 import Register from "@/pages/Register.vue";
 
 import { authGuard } from "./guards";
@@ -42,7 +42,7 @@ const routes: RouterOptions["routes"] = [
     },
   },
   {
-    component: CreateArticle,
+    component: NewArticle,
     path: "/new",
     name: "new-article",
     meta: {
