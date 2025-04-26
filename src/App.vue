@@ -6,8 +6,6 @@
 
 <template>
   <ToastProvider>
-    <main class="container">
-      <RouterView />
-    </main>
+    <RouterView />
   </ToastProvider>
 </template>
