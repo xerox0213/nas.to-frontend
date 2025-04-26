@@ -1,6 +1,6 @@
 <script lang="ts">
   import { toTypedSchema } from "@vee-validate/yup";
-  import { configure, useForm } from "vee-validate";
+  import { configure, type SubmissionContext, useForm } from "vee-validate";
   import { computed, useTemplateRef } from "vue";
   import * as yup from "yup";
 
@@ -36,14 +36,16 @@
 
   const validationSchema = toTypedSchema(articleSchema);
 
-  export type ArticleFields = yup.InferType<typeof articleSchema>;
+  export type ArticleValues = yup.InferType<typeof articleSchema>;
+
+  export type Ctx = SubmissionContext<Partial<ArticleValues>>;
 
   interface Props {
-    initialValues?: Partial<ArticleFields>;
+    initialValues?: Partial<ArticleValues>;
   }
 
   interface Emits {
-    submit: [values: ArticleFields];
+    submit: [values: ArticleValues, ctx: Ctx];
   }
 </script>
 
@@ -101,7 +103,7 @@
     }
   };
 
-  const onSubmit = handleSubmit((values) => emits("submit", values));
+  const onSubmit = handleSubmit((values, ctx) => emits("submit", values, ctx));
 </script>
 
 <template>
