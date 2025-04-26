@@ -2,6 +2,7 @@ import "vue-router";
 
 import { createRouter, createWebHistory, type RouterOptions } from "vue-router";
 
+import CreateArticle from "@/pages/CreateArticle.vue";
 import Home from "@/pages/Home.vue";
 import Login from "@/pages/Login.vue";
 import Register from "@/pages/Register.vue";
@@ -36,6 +37,14 @@ const routes: RouterOptions["routes"] = [
     component: Home,
     name: "home",
     path: "/",
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    component: CreateArticle,
+    path: "/new",
+    name: "new-article",
     meta: {
       requiresAuth: true,
     },
