@@ -6,10 +6,11 @@
 
   import { login } from "@/api/auth";
   import Button from "@/components/ui/button/Button.vue";
-  import ErrorMessage from "@/components/ui/form-elements/ErrorMessage.vue";
-  import FormField from "@/components/ui/form-elements/FormField.vue";
-  import Input from "@/components/ui/form-elements/Input.vue";
-  import Label from "@/components/ui/form-elements/Label.vue";
+  import FormControl from "@/components/ui/form/FormControl.vue";
+  import FormErrorMessage from "@/components/ui/form/FormErrorMessage.vue";
+  import FormField from "@/components/ui/form/FormField.vue";
+  import Input from "@/components/ui/input/Input.vue";
+  import Label from "@/components/ui/label/Label.vue";
   import { useToast } from "@/composables/useToast";
   import { UnauthorizedError, ValidationError } from "@/errors";
   import type { ValidationErrors } from "@/types";
@@ -30,15 +31,11 @@
 </script>
 
 <script setup lang="ts">
-  const { defineField, handleSubmit, setErrors } = useForm({
+  const { handleSubmit, setErrors } = useForm({
     validationSchema,
   });
 
   const { toast } = useToast();
-
-  const [email, emailProps] = defineField("email");
-
-  const [password, passwordProps] = defineField("password");
 
   const onSubmit = handleSubmit(async (values) => {
     try {
@@ -69,27 +66,37 @@
   >
     <h1 class="text-center text-2xl font-bold">Welcome back 😄</h1>
 
-    <FormField name="email" required class="flex flex-col gap-y-1">
+    <FormField
+      v-slot="{ componentField }"
+      name="email"
+      required
+      class="flex flex-col gap-y-1"
+    >
       <Label label="Email" />
-      <Input
-        v-model="email"
+      <FormControl
+        :as="Input"
+        v-bind="componentField"
         type="email"
         autocomplete="email"
         inputmode="email"
-        v-bind="emailProps"
       />
-      <ErrorMessage />
+      <FormErrorMessage />
     </FormField>
 
-    <FormField name="password" required class="flex flex-col gap-y-1">
+    <FormField
+      v-slot="{ componentField }"
+      name="password"
+      required
+      class="flex flex-col gap-y-1"
+    >
       <Label label="Password" />
-      <Input
-        v-model="password"
+      <FormControl
+        :as="Input"
+        v-bind="componentField"
         type="password"
         autocomplete="current-password"
-        v-bind="passwordProps"
       />
-      <ErrorMessage />
+      <FormErrorMessage />
     </FormField>
 
     <div class="flex flex-col gap-y-2">

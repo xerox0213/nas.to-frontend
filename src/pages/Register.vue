@@ -6,10 +6,11 @@
 
   import { register } from "@/api/auth";
   import Button from "@/components/ui/button/Button.vue";
-  import ErrorMessage from "@/components/ui/form-elements/ErrorMessage.vue";
-  import FormField from "@/components/ui/form-elements/FormField.vue";
-  import Input from "@/components/ui/form-elements/Input.vue";
-  import Label from "@/components/ui/form-elements/Label.vue";
+  import FormControl from "@/components/ui/form/FormControl.vue";
+  import FormErrorMessage from "@/components/ui/form/FormErrorMessage.vue";
+  import FormField from "@/components/ui/form/FormField.vue";
+  import Input from "@/components/ui/input/Input.vue";
+  import Label from "@/components/ui/label/Label.vue";
   import { useToast } from "@/composables/useToast";
   import { ValidationError } from "@/errors";
   import type { ValidationErrors } from "@/types";
@@ -40,19 +41,11 @@
 </script>
 
 <script setup lang="ts">
-  const { defineField, handleSubmit, setErrors } = useForm({
+  const { handleSubmit, setErrors } = useForm({
     validationSchema,
   });
 
   const { toast } = useToast();
-
-  const [name, nameProps] = defineField("name");
-
-  const [email, emailProps] = defineField("email");
-
-  const [password, passwordProps] = defineField("password");
-
-  const [confirm, confirmProps] = defineField("password_confirmation");
 
   const onSubmit = handleSubmit(async (values) => {
     try {
@@ -81,48 +74,64 @@
   >
     <h1 class="text-center text-2xl font-bold">Join the community 😄</h1>
 
-    <FormField name="name" required class="flex flex-col gap-y-1">
+    <FormField
+      v-slot="{ componentField }"
+      name="name"
+      required
+      class="flex flex-col gap-y-1"
+    >
       <Label label="Name" />
-      <Input v-model="name" autocomplete="name" v-bind="nameProps" />
-      <ErrorMessage />
-    </FormField>
-
-    <FormField name="email" required class="flex flex-col gap-y-1">
-      <Label label="Email" />
-      <Input
-        v-model="email"
-        type="email"
-        autocomplete="email"
-        inputmode="email"
-        v-bind="emailProps"
-      />
-      <ErrorMessage />
-    </FormField>
-
-    <FormField name="password" required class="flex flex-col gap-y-1">
-      <Label label="Password" />
-      <Input
-        v-model="password"
-        type="password"
-        autocomplete="new-password"
-        v-bind="passwordProps"
-      />
-      <ErrorMessage />
+      <FormControl :as="Input" v-bind="componentField" autocomplete="name" />
+      <FormErrorMessage />
     </FormField>
 
     <FormField
+      v-slot="{ componentField }"
+      name="email"
+      required
+      class="flex flex-col gap-y-1"
+    >
+      <Label label="Email" />
+      <FormControl
+        :as="Input"
+        v-bind="componentField"
+        type="email"
+        autocomplete="email"
+        inputmode="email"
+      />
+      <FormErrorMessage />
+    </FormField>
+
+    <FormField
+      v-slot="{ componentField }"
+      name="password"
+      required
+      class="flex flex-col gap-y-1"
+    >
+      <Label label="Password" />
+      <FormControl
+        :as="Input"
+        v-bind="componentField"
+        type="password"
+        autocomplete="new-password"
+      />
+      <FormErrorMessage />
+    </FormField>
+
+    <FormField
+      v-slot="{ componentField }"
       name="password_confirmation"
       required
       class="flex flex-col gap-y-1"
     >
       <Label label="Confirm password" />
-      <Input
-        v-model="confirm"
+      <FormControl
+        :as="Input"
+        v-bind="componentField"
         type="password"
-        v-bind="confirmProps"
         autocomplete="new-password"
       />
-      <ErrorMessage />
+      <FormErrorMessage />
     </FormField>
 
     <div class="flex flex-col gap-y-2">

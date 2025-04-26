@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Field, useFieldError } from "vee-validate";
   import {
     computed,
     type ComputedRef,
@@ -17,6 +18,7 @@
     errorMsgId: string;
     name: ComputedRef<string>;
     required: ComputedRef<boolean>;
+    invalid: ComputedRef<boolean>;
   }
 
   export const FormFieldCtxKey = Symbol() as InjectionKey<FormFieldCtx>;
@@ -35,16 +37,23 @@
 
   const errorMsgId = useId();
 
+  const errorMsg = useFieldError(props.name);
+
+  const invalid = computed(() => errorMsg.value != "");
+
   provide(FormFieldCtxKey, {
     inputId,
     errorMsgId,
     name,
     required,
+    invalid,
   });
 </script>
 
 <template>
   <div>
-    <slot />
+    <Field v-slot="slotProps" :name>
+      <slot v-bind="slotProps" />
+    </Field>
   </div>
 </template>
