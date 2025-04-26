@@ -27,7 +27,7 @@
       },
       isActive: {
         false: "",
-        true: "",
+        true: "cursor-default",
       },
     },
     compoundVariants: [
