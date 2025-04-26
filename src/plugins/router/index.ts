@@ -58,6 +58,6 @@ const router = createRouter({
   history,
 });
 
-router.beforeEach(authGuard);
+// router.beforeEach(authGuard);
 
 export { router };
