@@ -1,3 +1,11 @@
+<script setup lang="ts">
+  import Header from "@/components/layout/Header.vue";
+  import Main from "@/components/layout/Main.vue";
+</script>
+
 <template>
-  <h1>Welcome to nas.to</h1>
+  <Header />
+  <Main>
+    <RouterView />
+  </Main>
 </template>
