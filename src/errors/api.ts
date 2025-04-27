@@ -32,3 +32,9 @@ export class CsrfMismatchError extends ApiError {
     super(message);
   }
 }
+
+export class ServerError extends ApiError {
+  constructor(message: string) {
+    super(message);
+  }
+}
