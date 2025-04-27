@@ -26,3 +26,9 @@ export class UnauthorizedError extends ApiError {
     super(message);
   }
 }
+
+export class CsrfMismatchError extends ApiError {
+  constructor(message: string) {
+    super(message);
+  }
+}
