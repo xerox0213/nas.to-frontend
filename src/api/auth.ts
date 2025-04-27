@@ -2,12 +2,12 @@ import {
   UnauthenticatedError,
   UnauthorizedError,
   ValidationError,
-} from "@/errors";
-import type { LoginCredentials } from "@/pages/Login.vue";
-import type { RegistrationCredentials } from "@/pages/Register.vue";
-import type { User } from "@/types";
+} from "@/errors/api";
+import type { LoginCredentials } from "@/pages/login.vue";
+import type { RegistrationCredentials } from "@/pages/register.vue";
+import type { User } from "@/types/api";
 
-import { API_BASE_URL, options } from "./utils";
+import { API_BASE_URL, options } from "../utils/api";
 
 export const getCsrf = async () => {
   await fetch(`${API_BASE_URL}/sanctum/csrf-cookie`);

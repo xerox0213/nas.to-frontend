@@ -12,8 +12,8 @@
   import Input from "@/components/ui/input/Input.vue";
   import Label from "@/components/ui/label/Label.vue";
   import { useToast } from "@/composables/useToast";
-  import { ValidationError } from "@/errors";
-  import type { ValidationErrors } from "@/types";
+  import { ValidationError } from "@/errors/api";
+  import type { ValidationErrors } from "@/types/api";
 
   const registrationSchema = yup.object({
     name: yup.string().required("The name field is required"),

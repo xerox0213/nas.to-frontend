@@ -12,8 +12,8 @@
   import Input from "@/components/ui/input/Input.vue";
   import Label from "@/components/ui/label/Label.vue";
   import { useToast } from "@/composables/useToast";
-  import { UnauthorizedError, ValidationError } from "@/errors";
-  import type { ValidationErrors } from "@/types";
+  import { UnauthorizedError, ValidationError } from "@/errors/api";
+  import type { ValidationErrors } from "@/types/api";
 
   const loginSchema = yup.object({
     email: yup
