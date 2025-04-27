@@ -11,7 +11,7 @@ import { apiUrl, basicOptions, jsonOptions } from "../utils/api";
 
 export const getCsrf = async () => {
   const url = apiUrl("sanctum/csrf-cookie");
-  await fetch(url);
+  await fetch(url, basicOptions("GET"));
 };
 
 export const getUser = async (): Promise<User> => {
