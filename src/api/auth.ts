@@ -7,16 +7,20 @@ import type { LoginCredentials } from "@/pages/login.vue";
 import type { RegistrationCredentials } from "@/pages/register.vue";
 import type { User } from "@/types/api";
 
-import { API_BASE_URL, options } from "../utils/api";
+import { apiUrl, basicOptions, jsonOptions } from "../utils/api";
 
 export const getCsrf = async () => {
-  await fetch(`${API_BASE_URL}/sanctum/csrf-cookie`);
+  const url = apiUrl("sanctum/csrf-cookie");
+  await fetch(url);
 };
 
 export const getUser = async (): Promise<User> => {
   await getCsrf();
 
-  const res = await fetch(`${API_BASE_URL}/api/user`, options("GET"));
+  const url = apiUrl("api/user");
+  const options = basicOptions("GET");
+
+  const res = await fetch(url, options);
 
   if (!res.ok) {
     const error = await res.json();
@@ -36,10 +40,10 @@ export const getUser = async (): Promise<User> => {
 export const register = async (credentials: RegistrationCredentials) => {
   await getCsrf();
 
-  const res = await fetch(
-    `${API_BASE_URL}/api/register`,
-    options("POST", credentials),
-  );
+  const url = apiUrl("api/register");
+  const options = jsonOptions("POST", credentials);
+
+  const res = await fetch(url, options);
 
   if (!res.ok) {
     const error = await res.json();
@@ -54,10 +58,10 @@ export const register = async (credentials: RegistrationCredentials) => {
 export const login = async (credentials: LoginCredentials) => {
   await getCsrf();
 
-  const res = await fetch(
-    `${API_BASE_URL}/api/login`,
-    options("POST", credentials),
-  );
+  const url = apiUrl("api/login");
+  const options = jsonOptions("POST", credentials);
+
+  const res = await fetch(url, options);
 
   if (!res.ok) {
     const error = await res.json();
