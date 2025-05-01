@@ -43,6 +43,8 @@
         description: "Your new article has been successfully created.",
         variant: "success",
       });
+
+      ctx.resetForm();
     } catch (e) {
       if (e instanceof ValidationError) {
         const errors: CreateArticleErrors = e.errors;
