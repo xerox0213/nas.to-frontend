@@ -135,8 +135,8 @@
           alt="The cover image you have chosen."
         />
         <FormField name="cover_image" class="grow space-y-2 md:self-center">
-          <Button type="button" variant="outline" class="w-full">
-            <FormLabel>
+          <Button type="button" variant="outline" class="w-full p-0">
+            <FormLabel class="w-full px-4 py-2">
               <span v-if="coverImageUrl">Modify cover image</span>
               <span v-else>Add a cover image</span>
             </FormLabel>
