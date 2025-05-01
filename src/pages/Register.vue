@@ -1,6 +1,5 @@
 <script lang="ts">
   import { toTypedSchema } from "@vee-validate/yup";
-  import { Wifi } from "lucide-vue-next";
   import { useForm } from "vee-validate";
   import * as yup from "yup";
 
@@ -13,6 +12,7 @@
   import Label from "@/components/ui/label/Label.vue";
   import { useToast } from "@/composables/useToast";
   import { ValidationError } from "@/errors/api";
+  import { serverErrorToast } from "@/errors/toast";
   import type { ValidationErrors } from "@/types/api";
 
   const registrationSchema = yup.object({
@@ -55,12 +55,7 @@
         const error = e as ValidationError<RegistrationValidationErrors>;
         setErrors(error.errors);
       } else {
-        toast({
-          icon: Wifi,
-          title: "Uh Oh! Something went wrong.",
-          description: "There was a problem with your request.",
-          variant: "destructive",
-        });
+        toast(serverErrorToast);
       }
     }
   });
