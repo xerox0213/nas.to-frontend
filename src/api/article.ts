@@ -27,6 +27,8 @@ export const createArticle = async (
         throw new ValidationError(error.message, error.errors);
       case 500:
         throw new ServerError(error.message);
+      default:
+        throw error;
     }
   }
 
