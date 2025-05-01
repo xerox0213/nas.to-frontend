@@ -12,7 +12,14 @@ export const csrfMismatchErrorToast: ToastData = unauthenticatedErrorToast;
 
 export const serverErrorToast: ToastData = {
   icon: Wifi,
+  title: "Server Error",
+  description: "A problem occurred on the server. Please try again later.",
+  variant: "destructive",
+};
+
+export const typeErrorToast: ToastData = {
+  icon: Wifi,
   title: "Uh Oh! Something went wrong",
-  description: "There was a problem with your request.",
+  description: "There was a problem with you request.",
   variant: "destructive",
 };
