@@ -40,12 +40,14 @@
 
   export type Ctx = SubmissionContext<Partial<ArticleValues>>;
 
+  export type Submitted = () => void;
+
   interface Props {
     initialValues?: Partial<ArticleValues>;
   }
 
   interface Emits {
-    submit: [values: ArticleValues, ctx: Ctx];
+    submit: [values: ArticleValues, ctx: Ctx, submitted: Submitted];
   }
 </script>
 
@@ -54,11 +56,17 @@
 
   const emits = defineEmits<Emits>();
 
-  const { values, setFieldValue, resetField, setFieldError, handleSubmit } =
-    useForm({
-      validationSchema,
-      initialValues: props.initialValues,
-    });
+  const {
+    values,
+    setFieldValue,
+    resetField,
+    setFieldError,
+    handleSubmit,
+    isSubmitting,
+  } = useForm({
+    validationSchema,
+    initialValues: props.initialValues,
+  });
 
   configure({
     validateOnBlur: false,
@@ -103,7 +111,12 @@
     }
   };
 
-  const onSubmit = handleSubmit((values, ctx) => emits("submit", values, ctx));
+  const onSubmit = handleSubmit((values, ctx) => {
+    return new Promise((resolve) => {
+      const submitted = () => resolve(null);
+      emits("submit", values, ctx, submitted);
+    });
+  });
 </script>
 
 <template>
@@ -184,7 +197,13 @@
         <FormErrorMessage />
       </FormField>
 
-      <Button type="submit" class="mt-8 w-full font-semibold"> Publish </Button>
+      <Button
+        type="submit"
+        :loading="isSubmitting"
+        class="mt-8 w-full font-semibold"
+      >
+        Publish
+      </Button>
     </div>
   </form>
 </template>

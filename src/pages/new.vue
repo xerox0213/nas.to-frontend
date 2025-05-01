@@ -5,6 +5,7 @@
   import ArticleForm, {
     type ArticleValues,
     type Ctx,
+    type Submitted,
   } from "@/components/article/ArticleForm.vue";
   import Header from "@/components/layout/Header.vue";
   import Main from "@/components/layout/Main.vue";
@@ -28,7 +29,11 @@
 <script setup lang="ts">
   const { toast } = useToast();
 
-  const onSubmit = async (values: ArticleValues, ctx: Ctx) => {
+  const onSubmit = async (
+    values: ArticleValues,
+    ctx: Ctx,
+    submitted: Submitted,
+  ) => {
     try {
       await createArticle(values);
 
@@ -49,6 +54,8 @@
       } else if (e instanceof TypeError) {
         toast(typeErrorToast);
       }
+    } finally {
+      submitted();
     }
   };
 </script>
