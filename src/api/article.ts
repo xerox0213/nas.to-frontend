@@ -35,3 +35,14 @@ export const createArticle = async (
 
   return response.json();
 };
+
+export const getDiscoverArticles = async (): Promise<
+  PaginatedCollection<ArticlePreview>
+> => {
+  const url = apiUrl("api/articles/discover");
+  const options = basicOptions("GET");
+
+  const response = await fetch(url, options);
+
+  return response.json();
+};
