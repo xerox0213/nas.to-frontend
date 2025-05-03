@@ -44,4 +44,10 @@ export const routes: RouterOptions["routes"] = [
       requiresAuth: true,
     },
   },
+  {
+    path: "/articles/:id(\\d+)",
+    name: "articles.show",
+    props: (route) => ({ id: +route.params.id }),
+    component: () => import("@/pages/articles/[id].vue"),
+  },
 ];
