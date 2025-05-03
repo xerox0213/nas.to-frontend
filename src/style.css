@@ -26,6 +26,8 @@
   --color-success-accent: var(--color-emerald-400);
 
   --color-global-border: var(--color-zinc-200);
+
+  --color-skeleton: var(--color-zinc-200);
 }
 
 @layer base {
