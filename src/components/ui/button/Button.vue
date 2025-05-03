@@ -117,7 +117,12 @@
     <slot>{{ label }}</slot>
   </button>
 
-  <RouterLink v-else v-slot="{ href, navigate, isActive, isExactActive }" :to>
+  <RouterLink
+    v-else
+    v-slot="{ href, navigate, isActive, isExactActive }"
+    :to
+    custom
+  >
     <a
       :href="href"
       :class="
