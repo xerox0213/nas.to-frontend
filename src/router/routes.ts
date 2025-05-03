@@ -18,11 +18,8 @@ export const routes: RouterOptions["routes"] = [
     },
   },
   {
-    component: () => import("@/pages/index.vue"),
     path: "/",
-    meta: {
-      requiresAuth: true,
-    },
+    component: () => import("@/pages/index.vue"),
     children: [
       {
         path: "",
@@ -33,6 +30,9 @@ export const routes: RouterOptions["routes"] = [
         path: "following",
         component: () => import("@/pages/index/following.vue"),
         name: "articles-following.index",
+        meta: {
+          requiresAuth: true,
+        },
       },
     ],
   },
