@@ -7,8 +7,6 @@
     type Ctx,
     type Submitted,
   } from "@/components/article/ArticleForm.vue";
-  import Header from "@/components/layout/Header.vue";
-  import Main from "@/components/layout/Main.vue";
   import Title from "@/components/ui/title/Title.vue";
   import { useToast } from "@/composables/useToast";
   import {
@@ -21,6 +19,7 @@
     serverErrorToast,
     typeErrorToast,
   } from "@/errors/toast";
+  import MainLayout from "@/layouts/MainLayout.vue";
   import type { ValidationErrors } from "@/types/api";
 
   type CreateArticleErrors = ValidationErrors<ArticleValues>;
@@ -63,13 +62,12 @@
 </script>
 
 <template>
-  <Header />
-  <Main>
+  <MainLayout>
     <section
       class="border-global-border mx-auto my-5 max-w-[800px] rounded-sm border p-5"
     >
       <Title class="mb-10 text-center">Write your article ✏️</Title>
       <ArticleForm @submit="onSubmit" />
     </section>
-  </Main>
+  </MainLayout>
 </template>

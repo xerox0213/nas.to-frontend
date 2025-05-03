@@ -13,6 +13,7 @@
   import { useToast } from "@/composables/useToast";
   import { UnauthorizedError, ValidationError } from "@/errors/api";
   import { serverErrorToast } from "@/errors/toast";
+  import AuthLayout from "@/layouts/AuthLayout.vue";
   import type { ValidationErrors } from "@/types/api";
 
   const loginSchema = yup.object({
@@ -54,52 +55,54 @@
 </script>
 
 <template>
-  <form
-    novalidate
-    class="border-global-border m-auto mt-7 max-w-[450px] space-y-3 rounded-lg border p-5"
-    @submit.prevent="onSubmit"
-  >
-    <h1 class="text-center text-2xl font-bold">Welcome back 😄</h1>
-
-    <FormField
-      v-slot="{ componentField }"
-      name="email"
-      required
-      class="flex flex-col gap-y-1"
+  <AuthLayout>
+    <form
+      novalidate
+      class="border-global-border m-auto mt-7 max-w-[450px] space-y-3 rounded-lg border p-5"
+      @submit.prevent="onSubmit"
     >
-      <Label label="Email" />
-      <FormControl
-        :as="Input"
-        v-bind="componentField"
-        type="email"
-        autocomplete="email"
-        inputmode="email"
-      />
-      <FormErrorMessage />
-    </FormField>
+      <h1 class="text-center text-2xl font-bold">Welcome back 😄</h1>
 
-    <FormField
-      v-slot="{ componentField }"
-      name="password"
-      required
-      class="flex flex-col gap-y-1"
-    >
-      <Label label="Password" />
-      <FormControl
-        :as="Input"
-        v-bind="componentField"
-        type="password"
-        autocomplete="current-password"
-      />
-      <FormErrorMessage />
-    </FormField>
+      <FormField
+        v-slot="{ componentField }"
+        name="email"
+        required
+        class="flex flex-col gap-y-1"
+      >
+        <Label label="Email" />
+        <FormControl
+          :as="Input"
+          v-bind="componentField"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+        />
+        <FormErrorMessage />
+      </FormField>
 
-    <div class="flex flex-col gap-y-2">
-      <Button>Sign in</Button>
+      <FormField
+        v-slot="{ componentField }"
+        name="password"
+        required
+        class="flex flex-col gap-y-1"
+      >
+        <Label label="Password" />
+        <FormControl
+          :as="Input"
+          v-bind="componentField"
+          type="password"
+          autocomplete="current-password"
+        />
+        <FormErrorMessage />
+      </FormField>
 
-      <Button to="/register" variant="outline">
-        No account yet ? Sign up
-      </Button>
-    </div>
-  </form>
+      <div class="flex flex-col gap-y-2">
+        <Button>Sign in</Button>
+
+        <Button to="/register" variant="outline">
+          No account yet ? Sign up
+        </Button>
+      </div>
+    </form>
+  </AuthLayout>
 </template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import Header from "@/components/layout/Header.vue";
-  import Main from "@/components/layout/Main.vue";
+  import ArticleNav from "@/components/article/ArticleNav.vue";
+  import MainLayout from "@/layouts/MainLayout.vue";
 </script>
 
 <template>
-  <Header />
-  <Main>
+  <MainLayout>
+    <ArticleNav />
     <RouterView />
-  </Main>
+  </MainLayout>
 </template>

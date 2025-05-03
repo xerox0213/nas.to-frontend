@@ -12,11 +12,10 @@
       >
         NAS
       </RouterLink>
-
       <nav>
         <ul>
           <li>
-            <Button :to="{ name: 'new-article' }" variant="outline">
+            <Button :to="{ name: 'articles.store' }" variant="outline">
               Create Article
             </Button>
           </li>

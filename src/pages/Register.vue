@@ -13,6 +13,7 @@
   import { useToast } from "@/composables/useToast";
   import { ValidationError } from "@/errors/api";
   import { serverErrorToast } from "@/errors/toast";
+  import AuthLayout from "@/layouts/AuthLayout.vue";
   import type { ValidationErrors } from "@/types/api";
 
   const registrationSchema = yup.object({
@@ -62,79 +63,81 @@
 </script>
 
 <template>
-  <form
-    novalidate
-    class="border-global-border m-auto mt-7 max-w-[450px] space-y-3 rounded-lg border p-5"
-    @submit.prevent="onSubmit"
-  >
-    <h1 class="text-center text-2xl font-bold">Join the community 😄</h1>
-
-    <FormField
-      v-slot="{ componentField }"
-      name="name"
-      required
-      class="flex flex-col gap-y-1"
+  <AuthLayout>
+    <form
+      novalidate
+      class="border-global-border m-auto mt-7 max-w-[450px] space-y-3 rounded-lg border p-5"
+      @submit.prevent="onSubmit"
     >
-      <Label label="Name" />
-      <FormControl :as="Input" v-bind="componentField" autocomplete="name" />
-      <FormErrorMessage />
-    </FormField>
+      <h1 class="text-center text-2xl font-bold">Join the community 😄</h1>
 
-    <FormField
-      v-slot="{ componentField }"
-      name="email"
-      required
-      class="flex flex-col gap-y-1"
-    >
-      <Label label="Email" />
-      <FormControl
-        :as="Input"
-        v-bind="componentField"
-        type="email"
-        autocomplete="email"
-        inputmode="email"
-      />
-      <FormErrorMessage />
-    </FormField>
+      <FormField
+        v-slot="{ componentField }"
+        name="name"
+        required
+        class="flex flex-col gap-y-1"
+      >
+        <Label label="Name" />
+        <FormControl :as="Input" v-bind="componentField" autocomplete="name" />
+        <FormErrorMessage />
+      </FormField>
 
-    <FormField
-      v-slot="{ componentField }"
-      name="password"
-      required
-      class="flex flex-col gap-y-1"
-    >
-      <Label label="Password" />
-      <FormControl
-        :as="Input"
-        v-bind="componentField"
-        type="password"
-        autocomplete="new-password"
-      />
-      <FormErrorMessage />
-    </FormField>
+      <FormField
+        v-slot="{ componentField }"
+        name="email"
+        required
+        class="flex flex-col gap-y-1"
+      >
+        <Label label="Email" />
+        <FormControl
+          :as="Input"
+          v-bind="componentField"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+        />
+        <FormErrorMessage />
+      </FormField>
 
-    <FormField
-      v-slot="{ componentField }"
-      name="password_confirmation"
-      required
-      class="flex flex-col gap-y-1"
-    >
-      <Label label="Confirm password" />
-      <FormControl
-        :as="Input"
-        v-bind="componentField"
-        type="password"
-        autocomplete="new-password"
-      />
-      <FormErrorMessage />
-    </FormField>
+      <FormField
+        v-slot="{ componentField }"
+        name="password"
+        required
+        class="flex flex-col gap-y-1"
+      >
+        <Label label="Password" />
+        <FormControl
+          :as="Input"
+          v-bind="componentField"
+          type="password"
+          autocomplete="new-password"
+        />
+        <FormErrorMessage />
+      </FormField>
 
-    <div class="flex flex-col gap-y-2">
-      <Button>Sign up</Button>
+      <FormField
+        v-slot="{ componentField }"
+        name="password_confirmation"
+        required
+        class="flex flex-col gap-y-1"
+      >
+        <Label label="Confirm password" />
+        <FormControl
+          :as="Input"
+          v-bind="componentField"
+          type="password"
+          autocomplete="new-password"
+        />
+        <FormErrorMessage />
+      </FormField>
 
-      <Button to="/login" variant="outline">
-        Already have an account ? Sign In
-      </Button>
-    </div>
-  </form>
+      <div class="flex flex-col gap-y-2">
+        <Button>Sign up</Button>
+
+        <Button to="/login" variant="outline">
+          Already have an account ? Sign In
+        </Button>
+      </div>
+    </form>
+  </AuthLayout>
 </template>
