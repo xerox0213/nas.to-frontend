@@ -5,7 +5,7 @@ import {
 } from "@/errors/api";
 import type { LoginCredentials } from "@/pages/login.vue";
 import type { RegistrationCredentials } from "@/pages/register.vue";
-import type { User } from "@/types/api";
+import type { User } from "@/types/user";
 
 import { apiUrl, basicOptions, jsonOptions } from "../utils/api";
 

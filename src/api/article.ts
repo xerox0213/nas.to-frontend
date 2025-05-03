@@ -2,12 +2,13 @@ import { ValidationError } from "yup";
 
 import type { ArticleValues } from "@/components/article/ArticleForm.vue";
 import { CsrfMismatchError, ServerError } from "@/errors/api";
-import type { Article } from "@/types/api";
+import type { PaginatedCollection } from "@/types/api";
+import type { ArticleEntity, ArticlePreview } from "@/types/article";
 import { apiUrl, basicOptions } from "@/utils/api";
 
 export const createArticle = async (
   values: ArticleValues,
-): Promise<Pick<Article, "id">> => {
+): Promise<Pick<ArticleEntity, "id">> => {
   const formData = new FormData();
   const keys = Object.keys(values) as Array<keyof typeof values>;
   keys.forEach((key) => formData.append(key, values[key]));

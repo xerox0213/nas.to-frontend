@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import type { User } from "@/types/api";
+import type { User } from "@/types/user";
 
 const setup = () => {
   const initialized = ref<boolean>(false);
