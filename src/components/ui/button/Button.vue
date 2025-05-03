@@ -27,7 +27,7 @@
       },
       isActive: {
         false: "",
-        true: "cursor-default",
+        true: "cursor-default font-bold",
       },
     },
     compoundVariants: [
@@ -83,14 +83,20 @@
     icon?: boolean;
     loading?: boolean;
     to?: RouterLinkProps["to"];
-    activeClass?: RouterLinkProps["activeClass"];
-    exactActiveClass?: RouterLinkProps["exactActiveClass"];
+    activeStrategy?: "active" | "exact";
     class?: HTMLAttributes["class"];
   }
 </script>
 
 <script setup lang="ts">
-  const props = defineProps<Props>();
+  const props = withDefaults(defineProps<Props>(), {
+    label: undefined,
+    variant: undefined,
+    size: undefined,
+    to: undefined,
+    activeStrategy: "exact",
+    class: undefined,
+  });
 </script>
 
 <template>
@@ -119,8 +125,10 @@
           variant,
           size,
           icon,
-          isActive: isActive || isExactActive,
-          class: `${props.class} ${isActive && activeClass} ${isExactActive && exactActiveClass}`,
+          isActive:
+            (activeStrategy === 'active' && isActive) ||
+            (activeStrategy === 'exact' && isExactActive),
+          class: props.class,
         })
       "
       @click="navigate"
