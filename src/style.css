@@ -9,6 +9,7 @@
 @theme {
   --color-background: white;
   --color-foreground: var(--color-zinc-950);
+  --color-foreground-accent: var(--color-zinc-500);
 
   --color-primary: var(--color-zinc-900);
   --color-primary-foreground: var(--color-zinc-50);
