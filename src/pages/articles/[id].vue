@@ -4,7 +4,7 @@
   import { useRoute, useRouter } from "vue-router";
 
   import { getMemberArticle } from "@/api/article";
-  import ArticleDetails from "@/components/article/article-details/ArticleDetails.vue";
+  import ArticleDetailsCard from "@/components/article/article-details/ArticleDetailsCard.vue";
   import ArticleDetailsSkeleton from "@/components/article/article-details/ArticleDetailsSkeleton.vue";
   import { NotFoundError } from "@/errors/api";
   import MainLayout from "@/layouts/MainLayout.vue";
@@ -48,6 +48,6 @@
     <p v-if="isError" class="text-center">
       Uh, Oh! Something went wrong, please try later... 😐
     </p>
-    <ArticleDetails v-else-if="data" :article="data" />
+    <ArticleDetailsCard v-else-if="data" :article="data" />
   </MainLayout>
 </template>
