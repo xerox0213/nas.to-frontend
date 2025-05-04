@@ -18,8 +18,8 @@
     </template>
 
     <template #metadata>
-      <Skeleton class="h-2 w-28 rounded-full" />
-      <Skeleton class="h-2 w-28 rounded-full" />
+      <Skeleton class="h-3.5 w-28 rounded-full" />
+      <Skeleton class="h-3 w-28 rounded-full" />
     </template>
 
     <template #content>
