@@ -14,6 +14,7 @@
       metaDataWrapper: "flex flex-col gap-y-1",
       dateWrapper: "flex flex-wrap text-sm",
       articleContent: "space-y-3",
+      articleTitle: "wrap-break-word",
     },
   });
 
@@ -32,6 +33,7 @@
     metaDataWrapper,
     dateWrapper,
     articleContent,
+    articleTitle,
   } = articleDetailsTv();
 </script>
 
@@ -68,7 +70,7 @@
       </div>
 
       <div :class="articleContent()">
-        <Title heading="h1">
+        <Title heading="h1" :class="articleTitle()">
           {{ article.title }}
         </Title>
         <Markdown :source="article.content" />
