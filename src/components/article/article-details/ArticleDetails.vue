@@ -8,8 +8,9 @@
 
   export const articleDetailsTv = tv({
     slots: {
-      coverImage: "h-52 w-full rounded-t-lg object-cover lg:h-96",
-      body: "border-global-border bg-background rounded-b-lg border-x border-b px-4 py-5",
+      root: "border-global-border overflow-hidden rounded-lg border",
+      coverImage: "bg-empty h-52 w-full object-cover lg:h-96",
+      body: "bg-background px-4 py-5",
       headerWrapper: "mb-5 flex gap-x-2",
       metaDataWrapper: "flex flex-col gap-y-1",
       dateWrapper: "flex flex-wrap text-sm",
@@ -27,6 +28,7 @@
   defineProps<Props>();
 
   const {
+    root,
     coverImage,
     body,
     headerWrapper,
@@ -38,7 +40,7 @@
 </script>
 
 <template>
-  <article>
+  <article :class="root()">
     <a
       :href="article.cover_image_url"
       target="_blank"

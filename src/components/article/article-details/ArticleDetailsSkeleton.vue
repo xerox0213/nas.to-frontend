@@ -3,12 +3,18 @@
 
   import { articleDetailsTv } from "./ArticleDetails.vue";
 
-  const { coverImage, body, headerWrapper, metaDataWrapper, articleContent } =
-    articleDetailsTv();
+  const {
+    root,
+    coverImage,
+    body,
+    headerWrapper,
+    metaDataWrapper,
+    articleContent,
+  } = articleDetailsTv();
 </script>
 
 <template>
-  <div class="cursor-progress">
+  <div :class="root({ class: 'cursor-progress' })">
     <Skeleton :class="coverImage()" />
 
     <div :class="body()">
