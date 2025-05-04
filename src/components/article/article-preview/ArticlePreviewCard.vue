@@ -11,7 +11,8 @@
       link: "absolute inset-0 z-0 rounded-lg",
       authorWrapper: "flex items-center gap-x-2",
       authorDataWrapper: "flex flex-col gap-y-1",
-      coverImage: "block h-52 w-full rounded-t-lg object-cover lg:h-72",
+      coverImage: "",
+      fallbackCoverImage: "bg-skeleton",
       content:
         "border-global-border space-y-2 rounded-b-lg border-x border-b px-4 pt-8 pb-4",
       authorName: "text-sm",
@@ -21,6 +22,10 @@
       {
         slots: ["root", "link"],
         class: "rounded-lg",
+      },
+      {
+        slots: ["coverImage", "fallbackCoverImage"],
+        class: "block h-52 w-full rounded-t-lg object-cover lg:h-72",
       },
     ],
   });
@@ -37,6 +42,7 @@
     root,
     link,
     coverImage,
+    fallbackCoverImage,
     content,
     authorWrapper,
     authorDataWrapper,
@@ -56,8 +62,11 @@
       v-if="article.cover_image_url"
       :src="article.cover_image_url"
       alt=""
+      loading="lazy"
       :class="coverImage()"
     />
+
+    <div v-else :class="fallbackCoverImage()"></div>
 
     <div :class="content()">
       <div :class="authorWrapper()">
