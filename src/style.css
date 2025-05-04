@@ -28,6 +28,8 @@
   --color-global-border: var(--color-zinc-200);
 
   --color-skeleton: var(--color-zinc-200);
+
+  --color-empty: var(--color-zinc-200);
 }
 
 @layer base {
