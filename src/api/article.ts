@@ -36,11 +36,12 @@ export const createArticle = async (
   return response.json();
 };
 
-export const getDiscoverArticles = async (): Promise<
-  PaginatedCollection<ArticlePreview>
-> => {
-  const url = apiUrl("api/articles/discover");
+export const getDiscoverArticles = async (
+  next?: string,
+): Promise<PaginatedCollection<ArticlePreview>> => {
   const options = basicOptions("GET");
+
+  const url = next || apiUrl(`api/articles/discover`);
 
   const response = await fetch(url, options);
 
