@@ -1,9 +1,13 @@
 import { ValidationError } from "yup";
 
 import type { ArticleValues } from "@/components/article/ArticleForm.vue";
-import { CsrfMismatchError, ServerError } from "@/errors/api";
+import { CsrfMismatchError, NotFoundError, ServerError } from "@/errors/api";
 import type { PaginatedCollection } from "@/types/api";
-import type { ArticleEntity, ArticlePreview } from "@/types/article";
+import type {
+  ArticleDetails,
+  ArticleEntity,
+  ArticlePreview,
+} from "@/types/article";
 import { apiUrl, basicOptions } from "@/utils/api";
 
 export const createArticle = async (
@@ -44,6 +48,26 @@ export const getDiscoverArticles = async (
   const url = next || apiUrl(`api/articles/discover`);
 
   const response = await fetch(url, options);
+
+  return response.json();
+};
+
+export const getMemberArticle = async (id: number): Promise<ArticleDetails> => {
+  const options = basicOptions("GET");
+  const url = apiUrl(`api/articles/${id}`);
+
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    switch (response.status) {
+      case 404:
+        throw new NotFoundError(error.message);
+      default:
+        throw error;
+    }
+  }
 
   return response.json();
 };
