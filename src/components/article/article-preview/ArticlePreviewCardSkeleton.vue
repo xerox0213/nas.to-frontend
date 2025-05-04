@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <div :class="root()">
+  <div :class="root({ class: 'cursor-progress' })">
     <Skeleton :class="coverImage()" />
     <div :class="content()">
       <div :class="authorWrapper()">
