@@ -13,6 +13,8 @@
       coverWrapper: "h-52 lg:h-96",
       cover: "bg-empty size-full object-cover",
       contentWrapper: "space-y-3",
+      authorName: "text-sm",
+      date: "text-foreground-accent text-xs",
       title: "wrap-break-word",
     },
   });
@@ -25,7 +27,8 @@
 <script setup lang="ts">
   defineProps<Props>();
 
-  const { coverWrapper, cover, contentWrapper, title } = articleDetailsTv();
+  const { coverWrapper, cover, contentWrapper, authorName, date, title } =
+    articleDetailsTv();
 </script>
 
 <template>
@@ -49,8 +52,10 @@
     </template>
 
     <template #metadata>
-      <span>{{ article.author.name }}</span>
-      <span>{{ article.created_at }} {{ article.updated_at }}</span>
+      <span :class="authorName()">{{ article.author.name }}</span>
+      <span :class="date()">
+        {{ article.created_at }} {{ article.updated_at }}
+      </span>
     </template>
 
     <template #content>
