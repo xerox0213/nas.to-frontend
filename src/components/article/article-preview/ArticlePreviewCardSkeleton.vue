@@ -1,13 +1,16 @@
 <script setup lang="ts">
   import Skeleton from "@/components/ui/skeleton/Skeleton.vue";
 
-  import ArticlePreviewCard from "./ArticlePreviewCard.vue";
+  import ArticleCard from "../ArticleCard.vue";
+  import { articlePreviewTv } from "./ArticlePreviewCard.vue";
+
+  const { coverWrapper } = articlePreviewTv();
 </script>
 
 <template>
-  <ArticlePreviewCard>
+  <ArticleCard>
     <template #cover>
-      <Skeleton class="size-full" />
+      <Skeleton :class="coverWrapper()" />
     </template>
 
     <template #avatar>
@@ -20,7 +23,7 @@
     </template>
 
     <template #content>
-      <Skeleton class="h-10 rounded-full" />
+      <Skeleton class="h-12 rounded-full" />
     </template>
-  </ArticlePreviewCard>
+  </ArticleCard>
 </template>
