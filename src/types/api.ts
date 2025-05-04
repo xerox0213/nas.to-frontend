@@ -1,7 +1,3 @@
-export type Collection<T> = {
-  data: T;
-};
-
 export type PaginationMeta = {
   current_page: number;
   from: number | null;
@@ -19,7 +15,8 @@ export interface PaginationLinks {
   next: string | null;
 }
 
-export type PaginatedCollection<T> = Collection<T> & {
+export type PaginatedCollection<T> = {
+  data: T;
   links: PaginationLinks;
   meta: PaginationMeta;
 };
