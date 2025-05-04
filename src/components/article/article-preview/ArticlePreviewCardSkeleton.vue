@@ -3,17 +3,22 @@
 
   import { articlePreviewTv } from "./ArticlePreviewCard.vue";
 
-  const { root, coverImage, content, authorWrapper, authorDataWrapper } =
-    articlePreviewTv();
+  const {
+    root,
+    coverImage,
+    body: content,
+    headerWrapper,
+    metadataWrapper,
+  } = articlePreviewTv();
 </script>
 
 <template>
   <div :class="root({ class: 'cursor-progress' })">
-    <Skeleton :class="coverImage()" />
+    <Skeleton :class="coverImage({ class: 'bg-skeleton' })" />
     <div :class="content()">
-      <div :class="authorWrapper()">
+      <div :class="headerWrapper()">
         <Skeleton class="size-8 rounded-full" />
-        <div :class="authorDataWrapper()">
+        <div :class="metadataWrapper()">
           <Skeleton class="h-2 w-24 rounded-full" />
           <Skeleton class="h-2 w-24 rounded-full" />
         </div>

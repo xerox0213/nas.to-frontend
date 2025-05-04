@@ -7,27 +7,16 @@
 
   export const articlePreviewTv = tv({
     slots: {
-      root: "bg-background relative rounded-lg",
+      root: "bg-background border-global-border relative rounded-lg border",
       link: "absolute inset-0 z-0 rounded-lg",
-      authorWrapper: "flex items-center gap-x-2",
-      authorDataWrapper: "flex flex-col gap-y-1",
-      coverImage: "",
-      fallbackCoverImage: "bg-skeleton",
-      content:
-        "border-global-border space-y-2 rounded-b-lg border-x border-b px-4 pt-8 pb-4",
+      headerWrapper: "flex gap-x-2",
+      metadataWrapper: "flex flex-col gap-y-1",
+      coverImage:
+        "bg-empty block h-52 w-full rounded-t-i object-cover lg:h-72",
+      body: "space-y-2 px-4 py-5",
       authorName: "text-sm",
       createdDate: "text-foreground-accent text-xs",
     },
-    compoundSlots: [
-      {
-        slots: ["root", "link"],
-        class: "rounded-lg",
-      },
-      {
-        slots: ["coverImage", "fallbackCoverImage"],
-        class: "block h-52 w-full rounded-t-lg object-cover lg:h-72",
-      },
-    ],
   });
 
   interface Props {
@@ -42,10 +31,9 @@
     root,
     link,
     coverImage,
-    fallbackCoverImage,
-    content,
-    authorWrapper,
-    authorDataWrapper,
+    body,
+    headerWrapper,
+    metadataWrapper,
     authorName,
     createdDate,
   } = articlePreviewTv();
@@ -66,16 +54,14 @@
       :class="coverImage()"
     />
 
-    <div v-else :class="fallbackCoverImage()"></div>
-
-    <div :class="content()">
-      <div :class="authorWrapper()">
+    <div :class="body()">
+      <div :class="headerWrapper()">
         <Avatar
           :src="article.author.avatar_image_url"
           :alt="article.author.name"
         />
 
-        <div :class="authorDataWrapper()">
+        <div :class="metadataWrapper()">
           <span :class="authorName()">{{ article.author.name }}</span>
           <span :class="createdDate()">{{ article.created_at }}</span>
         </div>
