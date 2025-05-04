@@ -42,16 +42,12 @@
 <template>
   <article :class="root()">
     <a
+      v-if="article.cover_image_url"
       :href="article.cover_image_url"
       target="_blank"
       aria-labelledby="acc-name"
     >
-      <img
-        v-if="article.cover_image_url"
-        :src="article.cover_image_url"
-        alt=""
-        :class="coverImage()"
-      />
+      <img :src="article.cover_image_url" alt="" :class="coverImage()" />
       <span id="acc-name" hidden>Show cover image</span>
     </a>
 
