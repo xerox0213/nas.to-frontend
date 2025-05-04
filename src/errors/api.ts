@@ -38,3 +38,9 @@ export class ServerError extends ApiError {
     super(message);
   }
 }
+
+export class NotFoundError extends ApiError {
+  constructor(message: string) {
+    super(message);
+  }
+}
