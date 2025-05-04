@@ -50,9 +50,11 @@
     </ol>
 
     <ol v-if="articles.length" :class="listCard()">
-      <li v-for="article in articles" :key="article.id">
-        <ArticlePreviewCard :article />
-      </li>
+      <ArticlePreviewCard
+        v-for="article in articles"
+        :key="article.id"
+        :article
+      />
     </ol>
 
     <p
