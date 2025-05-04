@@ -7,16 +7,23 @@
 
   export const articlePreviewTv = tv({
     slots: {
-      root: "bg-background border-global-border relative rounded-lg border",
-      link: "absolute inset-0 z-0 rounded-lg",
+      root: "relative",
+      link: "absolute inset-0 z-0",
+      card: "bg-background border-global-border overflow-hidden border",
       headerWrapper: "flex gap-x-2",
       metadataWrapper: "flex flex-col gap-y-1",
-      coverImage:
-        "bg-empty block h-52 w-full rounded-t-i object-cover lg:h-72",
+      coverImage: "bg-empty block h-52 w-full object-cover lg:h-72",
       body: "space-y-2 px-4 py-5",
       authorName: "text-sm",
       createdDate: "text-foreground-accent text-xs",
     },
+
+    compoundSlots: [
+      {
+        slots: ["link", "card"],
+        class: "rounded-lg",
+      },
+    ],
   });
 
   interface Props {
@@ -29,6 +36,7 @@
 
   const {
     root,
+    card,
     link,
     coverImage,
     body,
@@ -45,29 +53,30 @@
       :to="{ name: 'articles.show', params: { id: article.id } }"
       :class="link()"
     />
+    <div :class="card()">
+      <img
+        v-if="article.cover_image_url"
+        :src="article.cover_image_url"
+        alt=""
+        loading="lazy"
+        :class="coverImage()"
+      />
 
-    <img
-      v-if="article.cover_image_url"
-      :src="article.cover_image_url"
-      alt=""
-      loading="lazy"
-      :class="coverImage()"
-    />
+      <div :class="body()">
+        <div :class="headerWrapper()">
+          <Avatar
+            :src="article.author.avatar_image_url"
+            :alt="article.author.name"
+          />
 
-    <div :class="body()">
-      <div :class="headerWrapper()">
-        <Avatar
-          :src="article.author.avatar_image_url"
-          :alt="article.author.name"
-        />
-
-        <div :class="metadataWrapper()">
-          <span :class="authorName()">{{ article.author.name }}</span>
-          <span :class="createdDate()">{{ article.created_at }}</span>
+          <div :class="metadataWrapper()">
+            <span :class="authorName()">{{ article.author.name }}</span>
+            <span :class="createdDate()">{{ article.created_at }}</span>
+          </div>
         </div>
-      </div>
 
-      <Title heading="h2">{{ article.title }}</Title>
+        <Title heading="h2">{{ article.title }}</Title>
+      </div>
     </div>
   </li>
 </template>
