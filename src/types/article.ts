@@ -13,3 +13,7 @@ export type ArticleEntity = {
 export type ArticlePreview = Omit<ArticleEntity, "user_id" | "content"> & {
   author: Author;
 };
+
+export type ArticleDetails = Omit<ArticleEntity, "user_id"> & {
+  author: Author;
+};
