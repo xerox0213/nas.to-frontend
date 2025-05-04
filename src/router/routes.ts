@@ -50,4 +50,9 @@ export const routes: RouterOptions["routes"] = [
     props: (route) => ({ id: +route.params.id }),
     component: () => import("@/pages/articles/[id].vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/pages/not-found.vue"),
+  },
 ];
