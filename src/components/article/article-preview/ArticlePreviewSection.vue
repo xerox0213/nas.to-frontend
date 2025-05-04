@@ -29,8 +29,8 @@
   import Button from "@/components/ui/button/Button.vue";
   import Title from "@/components/ui/title/Title.vue";
 
-  import ArticlePreviewCard from "./ArticlePreviewCard.vue";
   import ArticlePreviewCardSkeleton from "./ArticlePreviewCardSkeleton.vue";
+  import ArticlePreviewLinkCard from "./ArticlePreviewLinkCard.vue";
 
   defineProps<Props>();
 
@@ -50,11 +50,9 @@
     </ol>
 
     <ol v-if="articles.length" :class="listCard()">
-      <ArticlePreviewCard
-        v-for="article in articles"
-        :key="article.id"
-        :article
-      />
+      <li v-for="article in articles" :key="article.id" class="relative">
+        <ArticlePreviewLinkCard :article />
+      </li>
     </ol>
 
     <p
