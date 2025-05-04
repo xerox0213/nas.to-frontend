@@ -15,7 +15,7 @@
 
 <template>
   <div :class="root({ class: 'cursor-progress' })">
-    <Skeleton :class="coverImage()" />
+    <Skeleton :class="coverImage({ coverImage: 'bg-skeleton' })" />
 
     <div :class="body()">
       <div :class="headerWrapper()">
