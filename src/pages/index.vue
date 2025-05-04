@@ -5,7 +5,7 @@
 
 <template>
   <MainLayout>
-    <ArticleNav />
+    <ArticleNav class="mb-5" />
     <RouterView />
   </MainLayout>
 </template>
