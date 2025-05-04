@@ -3,7 +3,7 @@
   import type { HTMLAttributes } from "vue";
 
   const skeleton = tv({
-    base: "bg-skeleton animate-pulse cursor-progress",
+    base: "bg-skeleton animate-pulse",
   });
 
   interface Props {
